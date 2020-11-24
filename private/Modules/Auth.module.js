@@ -45,6 +45,8 @@ class AuthModule extends AbstractModule {
               credentials, {[key]:  DIG_OUT(req, REQ_PROPS.FORM, REQ_PROPS.FIELDS, key)}
             ), {}
           );
+      
+      userData[PROFILE.EMAIL] = userData[PROFILE.EMAIL].toLowerCase();
 
       const
         _save = (prop, val) => Object.assign(userData, {[prop]: val}),
