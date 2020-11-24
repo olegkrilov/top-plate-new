@@ -61,17 +61,35 @@ module.exports = (App) => {
         ),
         plates => plates.map(plate => plate.getNormalized())
       )
+    },
+    
+    _GET_LIST_BY_HASHTAG = (hashtags, query) => {
+      let
+        listOfIds = [];
+    
+      return PIPE(
+        () => DatabaseModule.getModel(DB_MODELS.HASHTAG).find({[COMMON.LABEL]: {$in: hashtags}}),
+        _hashtags => _hashtags.forEach(d =>
+          listOfIds = listOfIds.concat(AS_ARRAY(DIG_OUT(d, SPECIAL_KEYS.USED_IN)))
+        ),
+        () => Object.assign(query, {[COMMON.DB_ID]: {$in: listOfIds}})
+      );
     };
 
   /** Handlers */
   const
     GET_PLATES = (req, res) => {
+      const
+        query = {
+          [PLATE.ENV]: DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.ENV) || DEFAULT_ENV,
+          [SPECIAL_KEYS.IS_READY]: true
+        },
+        hashtags = (DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.HASHTAGS) || '').split(SPECIAL_KEYS.COMMA_SEPARATOR);
+      
       PIPE(
+        // () => hashtags.length && _GET_LIST_BY_HASHTAG(hashtags, query),
         () => _LOAD_PLATES(
-          {
-            [PLATE.ENV]: DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.ENV) || DEFAULT_ENV,
-            [SPECIAL_KEYS.IS_READY]: true
-          },
+          query,
           _DEFINE_LIMIT(req),
           _DEFINE_CURSOR(req)
         ),
@@ -121,7 +139,7 @@ module.exports = (App) => {
       const
         User = DIG_OUT(req, PROFILE.USER),
         {fields, files} = DIG_OUT(req, REQ_PROPS.FORM);
-
+      
       const
         _createPlate = () => PIPE(
           () => DatabaseModule.getModel(DB_MODELS.PLATE),
@@ -129,6 +147,7 @@ module.exports = (App) => {
         ),
 
         _addContent = Plate => PIPE(
+          () => console.log(Plate),
           () => StorageModule.saveFile(
             DIG_OUT(files, FILE_PROPS.VIDEO),
             FILE_PROPS.VIDEO,
@@ -242,7 +261,7 @@ module.exports = (App) => {
 
   /** Routes */
   App.get(
-    `/${ROUTES.CONTENT.GET_PLATES}/:${PLATE.ENV}?/:${REQ_PROPS.LIMIT}?/:${REQ_PROPS.CURSOR}?`,
+    `/${ROUTES.CONTENT.GET_PLATES}/:${PLATE.ENV}?/:${REQ_PROPS.LIMIT}?/:${REQ_PROPS.CURSOR}?/:${PLATE.HASHTAGS}?`,
     MIDDLEWARES.PREPARE_PARAMS(FORM_KEYS.GET_PLATES_FORM),
     GET_PLATES
   );

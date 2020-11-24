@@ -70,7 +70,7 @@ class StorageModule extends AbstractModule {
       fileExt = GET_FILE_EXTENSION(contentType),
       fileName = `${prefix}_${GET_RANDOM_ID()}`,
       targetFolder = `${STORAGE.ROOT_DIR}${savePath ? '/' + savePath : ''}`;
-
+    
     return _saveFile(
       DIG_OUT(file, COMMON.PATH),
       `${targetFolder}`,
