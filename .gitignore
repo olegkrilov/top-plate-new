@@ -1,4 +1,4 @@
-.idea/*
-storage/*
-node_modules/*
-build/*
+.idea/
+storage/
+node_modules/
+build/
