@@ -11,7 +11,10 @@ const
     PROFILE, FILE_PROPS, SPECIAL_KEYS,
     ROUTES, PLATE, ENVIRONMENTS, FEEDBACK, FEEDBACK_TYPES
   } = CONSTANTS,
-  {DIG_OUT, DIG_IN, PIPE, SEND_ERROR, ADD_UNIQUE, GET_WEEK_STAMP, AS_ARRAY, AS_BOOLEAN} = HELPERS;
+  {
+    DIG_OUT, DIG_IN, PIPE, SEND_ERROR,
+    ADD_UNIQUE, GET_WEEK_STAMP, AS_ARRAY,
+    AS_BOOLEAN, IS_NULL, IS_NOT_NULL, IS_TRUE} = HELPERS;
 
 const
   DEFAULT_LIMIT = 12,
@@ -65,13 +68,19 @@ module.exports = (App) => {
     
     _GET_LIST_BY_HASHTAG = (hashtags, query) => {
       let
-        listOfIds = [];
+        listOfIds = null;
     
       return PIPE(
         () => DatabaseModule.getModel(DB_MODELS.HASHTAG).find({[COMMON.LABEL]: {$in: hashtags}}),
-        _hashtags => _hashtags.forEach(d =>
-          listOfIds = listOfIds.concat(AS_ARRAY(DIG_OUT(d, SPECIAL_KEYS.USED_IN)))
-        ),
+        _hashtags => _hashtags.forEach(d => {
+          const
+            usedIn = AS_ARRAY(DIG_OUT(d, SPECIAL_KEYS.USED_IN));
+        
+          if (IS_NULL(listOfIds)) listOfIds = [...usedIn];
+          else listOfIds.forEach((id, index) => listOfIds[index] = usedIn.includes(id) ? id : null);
+          
+          listOfIds = listOfIds.filter(IS_NOT_NULL);
+        }),
         () => Object.assign(query, {[COMMON.DB_ID]: {$in: listOfIds}})
       );
     };
@@ -84,10 +93,14 @@ module.exports = (App) => {
           [PLATE.ENV]: DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.ENV) || DEFAULT_ENV,
           [SPECIAL_KEYS.IS_READY]: true
         },
-        hashtags = (DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.HASHTAGS) || '').split(SPECIAL_KEYS.COMMA_SEPARATOR);
+        hashtags = (DIG_OUT(req, REQ_PROPS.PARAMS, PLATE.HASHTAGS) || '')
+          .split(SPECIAL_KEYS.COMMA_SEPARATOR)
+          .filter(IS_TRUE);
+      
+      console.log(hashtags);
       
       PIPE(
-        // () => hashtags.length && _GET_LIST_BY_HASHTAG(hashtags, query),
+        () => hashtags.length && _GET_LIST_BY_HASHTAG(hashtags, query),
         () => _LOAD_PLATES(
           query,
           _DEFINE_LIMIT(req),
