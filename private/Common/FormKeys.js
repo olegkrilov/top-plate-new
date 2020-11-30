@@ -41,7 +41,8 @@ module.exports = {
   GET_PLATES_FORM: [
     PLATE.ENV,
     REQ_PROPS.LIMIT,
-    REQ_PROPS.CURSOR
+    REQ_PROPS.CURSOR,
+    PLATE.HASHTAGS
   ],
   GET_PLATE_FORM: [
     COMMON.ID,
