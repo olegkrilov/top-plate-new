@@ -97,8 +97,6 @@ module.exports = (App) => {
           .split(SPECIAL_KEYS.COMMA_SEPARATOR)
           .filter(IS_TRUE);
       
-      console.log(hashtags);
-      
       PIPE(
         () => hashtags.length && _GET_LIST_BY_HASHTAG(hashtags, query),
         () => _LOAD_PLATES(
@@ -160,7 +158,6 @@ module.exports = (App) => {
         ),
 
         _addContent = Plate => PIPE(
-          () => console.log(Plate),
           () => StorageModule.saveFile(
             DIG_OUT(files, FILE_PROPS.VIDEO),
             FILE_PROPS.VIDEO,
