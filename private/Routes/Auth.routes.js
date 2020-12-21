@@ -104,6 +104,11 @@ module.exports = (App) => {
   App.post(
     `/${ROUTES.AUTHORIZATION.CREATE_LOCAL_USER}`,
     MIDDLEWARES.PREPARE_FORM(REQ_PROPS.FORM),
+    (req, res, next) => {
+      console.log(req.form);
+      next();
+      
+    },
     MIDDLEWARES.CHECK_REQUIRED_FIELDS(FORM_KEYS.CREATE_USER_FORM),
     CREATE_LOCAL_USER
   );

@@ -1,0 +1,339 @@
+{
+    "swagger": "2.0",
+    "info":{
+        "version": "1.0.0",
+        "title": "Top-Plate-Swagger",
+        "description": "This is your swagger for Top-Plate"
+    },
+    
+    "paths": {
+        "/login_local":{
+            "post": {
+                "tags":[
+                    "login local"
+                ],
+                "summary": "post login_local",             
+                "parameters": [
+                    {
+                        "in":"body",
+                        "name": "body",
+                        "description": "smt",
+                        "schema": {
+                            
+                            "$ref": "#/definitions/login_local"
+                        }
+                    }
+                ],
+                
+                "responses": {
+                    "200":{
+                        "description": "login_local",
+                        "schema":{
+                            "$ref": "#/definitions/login_local"
+                        }
+                    }
+                }
+            }
+        },
+        "/create_local_user":{
+            "post": {
+               "tags": [
+                   "create local user"
+               ],
+               "summary": "post create_local_user",
+               "parameters": [
+                {
+                    "in":"body",
+                    "name": "body",
+                    "description": "smt",
+                    "schema": {
+                        "$ref": "#/definitions/create_local_user"
+                    }
+                }
+            ],
+               "responses": {
+                   "200": {
+                       "description": "create_local_user",
+                       "schema":{
+                            "$ref": "#/definitions/create_local_user"
+                       }
+                   },
+                   "400":{
+                       "description": "Failed, bad post data"
+                   }
+               }
+            }
+        },
+        "/get_profile":{
+            "get": {
+                "tags": [
+                    "get profile"
+                ],
+                "summary": "get_profile",
+              
+                "responses": {
+                    "200": {
+                        "description": "get_profile",
+                        "schema":{
+                            "$ref": "#/definitions/login_local"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed, bad post data"
+                    }
+                }
+             }
+        },
+        "/update_subscriptions":{
+            "post": {
+               "tags": [
+                   "update subscriptions"
+               ],
+               "summary": "post update subscriptions",
+               "parameters": [
+                {
+                    "in":"body",
+                    "name": "body",
+                    "description": "smt",
+                    "schema": {
+                        "$ref": "#/definitions/update_subscriptions"
+                    }
+                }
+            ],
+               "responses": {
+                   "200": {
+                       "description": "update subscriptions"
+                    
+                   },
+                   "400":{
+                       "description": "Failed, bad post data"
+                   }
+               }
+            }
+        },
+        "/update_password":{
+            "post": {
+               "tags": [
+                   "update password"
+               ],
+               "summary": "post update password",
+               "parameters": [
+                {
+                    "in":"body",
+                    "name": "body",
+                    "description": "smt",
+                    "schema": {
+                        "$ref": "#/definitions/update_password"
+                    }
+                }
+            ],
+               "responses": {
+                   "200": {
+                       "description": "update password",
+                       "schema":{
+                            "$ref": "#/definitions/update_password"
+                       }
+                   },
+                   "400":{
+                       "description": "Failed, bad post data"
+                   }
+               }
+            }
+        },
+        "/log_out":{
+            "post": {
+               "tags": [
+                   "log out"
+               ],
+               "summary": "log out",
+               "responses": {
+                   "200": {
+                       "description": "log out"                     
+                   }
+                
+               }
+            }
+        },
+        "/get_plates":{
+            "get": {
+                "tags": [
+                    "get_plates"
+                ],
+                "summary": "get_plates",
+                "parameters": [
+                    {
+                        "in":"query",
+                        "name": "environment",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "in":"query",
+                        "name": "limit",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "in":"query",
+                        "name": "cursor",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+              
+                "responses": {
+                    "200": {
+                        "description": "get_plates",
+                        "schema":{
+                            "type":"array",
+                            "$ref": "#/definitions/plate"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+             }
+        },
+        "/get_plate":{
+            "get": {
+                "tags": [
+                    "get_plate"
+                ],
+                "summary": "get_plate",
+                "parameters": [
+                    {
+                        "in":"query",
+                        "name": "id",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get_plate",
+                        "schema":{
+                            "type":"array",
+                            "$ref": "#/definitions/plate"
+                        }
+                    },
+                    "400":{
+                        "description": "Failed"
+                    }
+                }
+            }
+        }
+        
+
+    },
+    
+  
+   
+    "definitions":{
+        "create_local_user":{
+            "type": "object",
+            "properties": {
+                "email":{
+                    "type": "string"
+                },
+                "password":{
+                    "type": "string"
+                },
+                "firstName":{
+                    "type": "string"
+                },
+                "lastName":{
+                    "type": "string"
+                }
+            }
+           
+        },
+        "login_local":{
+            "type": "object",
+            "properties": {
+                "email":{
+                    "type": "string"
+                },
+                "password":{
+                    "type": "string"
+                }
+            }
+        },
+        "update_subscriptions":{
+            "type": "object",
+            "properties": {
+                "onWarning":{
+                    "type": "string"
+                },
+                "onRateChange":{
+                    "type": "string"
+                },
+                "onComment":{
+                    "type": "string"
+                }
+            }
+        },
+        "update_passsword":{
+            "type": "object",
+            "properties": {
+                "password":{
+                    "type": "string"
+                },
+                "oldPassword":{
+                    "type": "string"
+                }
+            }
+        },
+        "get_plates":{
+            "type":"object",
+            "properties": {
+                "environment":{
+                    "type":"string"
+                },
+                "limit":{
+                    "type":"string"
+                },
+                "cursor":{
+                    "type":"string"
+                }
+            }
+        },
+        "plate":{
+            "type":"object",
+            "properties": {   
+                       "name":{
+                        "type": "string"
+                       },
+                       "environment":{
+                        "type": "string"
+                       },
+                       "week":{
+                        "type": "string"
+                       },
+                       "recipe":{
+                        "type": "string"
+                       },
+                       "ingredients":{
+                        "type": "string"
+                       },
+                       "likes":{
+                        "type": "string"
+                       },
+                       "hashtags":{
+                        "type": "string"
+                       },
+                       "comments":{
+                        "type": "string"
+                       },
+                       "reports":{
+                        "type": "string"
+                       },
+                       "relatedPlates":{
+                        "type": "object"
+                       }    
+            }
+        }
+        
+        
+    }
+}
