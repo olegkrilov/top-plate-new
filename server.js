@@ -21,7 +21,8 @@ const
   InitAuthRoutes = require('./private/Routes/Auth.routes'),
   InitProfileRoutes = require('./private/Routes/Profile.routes'),
   InitContentRoutes = require('./private/Routes/Content.routes'),
-  InitFeedbackRoutes = require('./private/Routes/Feedback.routes');
+  InitFeedbackRoutes = require('./private/Routes/Feedback.routes'),
+  InitDevRoutes = require('./private/Routes/Dev.routes');
 
 const
   {PORT, SESSION_KEY, SESSION_SECRET} = config,
@@ -100,11 +101,17 @@ async function initAuthorizationModule () {
 
 async function runServer () {
   console.log('Now running server...');
-  InitAuthRoutes(global[APP]);
-  InitProfileRoutes(global[APP]);
-  InitContentRoutes(global[APP]);
-  InitFeedbackRoutes(global[APP]);
-  return global[APP].listen(PORT, () => console.log(`Top-Plate-2 te salutant on PORT:${PORT}`));
+  return PIPE(
+    () => [
+      InitAuthRoutes,
+      InitProfileRoutes,
+      InitContentRoutes,
+      InitFeedbackRoutes,
+      InitDevRoutes
+    ].forEach(intiRoutes => intiRoutes(global[APP])),
+    () => global[DB].refreshDefaultEntities(),
+    () => global[APP].listen(PORT, () => console.log(`Top-Plate-2 te salutant on PORT:${PORT}`))
+  );
 }
 
 async function stopApp () {

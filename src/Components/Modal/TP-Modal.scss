@@ -1,0 +1,41 @@
+@import "../../Theme/Mixins";
+
+.tp-modal {
+
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.4);
+  opacity: 0;
+
+  @include use-transition(300ms);
+
+  &.isActive {
+    display: block;
+  }
+
+  &.isOpened {
+    opacity: 1;
+  }
+
+
+  .tp-modal-content {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include use-transition(300ms);
+    @include use-transformed(translate(0, -200px) scale(1, .8));
+
+    &.isOpened {
+      @include use-transformed(translate(0, 0px) scale(1, 1));
+    }
+  }
+}

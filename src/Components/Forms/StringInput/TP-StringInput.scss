@@ -1,0 +1,42 @@
+.tp-string-input {
+  display: inline-flex;
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0 20px;
+  position: relative;
+
+  .tp-string-input-decoration {
+    height: 100%;
+    width: 40px;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tp-string-input-core {
+    display: inline-block;
+    width: 100%;
+    background: transparent;
+
+    &, &:focus, &:active {
+      border: none!important;
+      outline: none!important;
+    }
+  }
+
+  &.hasDecoration {
+    padding-left: 40px;
+  }
+
+  &.isDisabled {
+    opacity: .7;
+  }
+}
+

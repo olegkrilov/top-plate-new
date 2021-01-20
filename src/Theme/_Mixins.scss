@@ -1,0 +1,61 @@
+@mixin use-overlay () {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin use-flex ($horizontal-align: center, $vertical-align: center) {
+  display: flex;
+  justify-content: $horizontal-align;
+  align-items: $vertical-align;
+}
+
+@mixin use-transition ($transition-settings...) {
+  -webkit-transition: $transition-settings;
+  -moz-transition: $transition-settings;
+  -ms-transition: $transition-settings;
+  -o-transition: $transition-settings;
+  transition: $transition-settings;
+}
+
+@mixin use-transition-delay ($transition-delay: 0ms) {
+  -webkit-transition-delay: $transition-delay;
+  -moz-transition-delay: $transition-delay;
+  -ms-transition-delay: $transition-delay;
+  -o-transition-delay: $transition-delay;
+  transition-delay: $transition-delay;
+}
+
+@mixin use-transformed ($transformation) {
+  -moz-transform: $transformation;
+  -o-transform: $transformation;
+  -ms-transform: $transformation;
+  -webkit-transform: $transformation;
+  transform: $transformation;
+}
+
+@mixin use-transformed-origin ($x: 50%, $y: 50%) {
+  moz-transform-origin: $x $y;
+  -o-transform-origin: $x $y;
+  -ms-transform-origin: $x $y;
+  -webkit-transform-origin: $x $y;
+  transform-origin: $x $y;
+}
+
+@mixin use-no-select {
+  -webkit-touch-callout: none!important;
+  -webkit-user-select: none!important;
+  -khtml-user-select: none!important;
+  -moz-user-select: none!important;
+  -ms-user-select: none!important;
+  user-select: none!important;
+}
+
+@mixin use-box-shadow ($box-shadow-settings: 1px 1px 5px 0 rgba(0,0,0,.5)) {
+  -webkit-box-shadow: $box-shadow-settings;
+  -moz-box-shadow: $box-shadow-settings;
+  box-shadow: $box-shadow-settings;
+}
+

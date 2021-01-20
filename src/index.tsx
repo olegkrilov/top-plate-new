@@ -1,17 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './index.scss';
+import {configure} from 'mobx';
+import {Provider} from 'mobx-react';
+import routesConfig from './Routes/Routes.config';
+import sharedService from './Services/Shared.service';
+import routingService from './Services/Routing.service';
+import userService from './Services/User.service';
+import apiService from './Services/API.service';
+
+import App from './App/App.component';
 import reportWebVitals from './reportWebVitals';
 
+configure({enforceActions: 'always'});
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider
+    sharedService={sharedService}
+    routingService={routingService.init(routesConfig)}
+    userService={userService}
+    apiService={apiService}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

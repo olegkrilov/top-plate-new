@@ -119,7 +119,7 @@ const
     return target;
   },
 
-  PIPE = async (...args) => new Promise((resolve, reject) => {
+  PIPE = (...args) => new Promise((resolve, reject) => {
     const
       _args = Array.from(args);
 

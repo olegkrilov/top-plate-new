@@ -13,7 +13,7 @@ const
   DEFAULT_ICON = 'assets/icons/default_user_icon.png';
 
 const
-  {DB_MODELS, PROVIDERS, PROFILE, FILE_PROPS, COMMON, MODULES, REQ_PROPS, FEEDBACK} = CONSTANTS,
+  {DB_MODELS, PROVIDERS, PROFILE, FILE_PROPS, COMMON, MODULES, REQ_PROPS, FEEDBACK, SPECIAL_KEYS} = CONSTANTS,
   {PIPE, AS_ARRAY, DIG_OUT, DIG_IN, IS_NOT_UNDEFINED, AS_BOOLEAN, GET_MONTH_STAMP, ADD_UNIQUE, REMOVE_UNIQUE} = HELPERS;
 
 /** Schema */
@@ -112,24 +112,29 @@ Schema[COMMON.METHODS].getNormalized = function () {
     customProfile = DIG_OUT(user, PROFILE.CUSTOM_PROFILE) || {},
     originalProfile = DIG_OUT(user, DIG_OUT(user, PROFILE.LAST_LOGGED, PROFILE.PROVIDER) || PROVIDERS.LOCAL) || {};
 
-  return {
-    _id: user._id,
-    user: AS_ARRAY(FORM_KEYS.PROFILE_FORM).reduce((_profile, key) =>
-        Object.assign(_profile, {[key]:
-            DIG_OUT(customProfile, key) ||
-            DIG_OUT(originalProfile, key)} ||
-          DIG_OUT(defaultValues, key)
-        ),
-      {[PROFILE.EMAIL]: DIG_OUT(user, PROFILE.EMAIL)}
-    ),
-    likedPlates: AS_ARRAY(user[PROFILE.LIKED_PLATES]).reduce(
-      (_plates, key) => Object.assign(_plates, {[key]: true}), {}
-    ),
-    subscriptions: DIG_OUT(user, PROFILE.SUBSCRIPTIONS) || {},
-    warning: user[PROFILE.WARNINGS],
-    email: user[PROFILE.EMAIL],
-    canVote: !DIG_OUT(user, PROFILE.CHARITY_VOTES, GET_MONTH_STAMP())
-  };
+  return [
+    COMMON.DB_ID,
+    PROFILE.WARNINGS,
+    PROFILE.EMAIL,
+    SPECIAL_KEYS.IS_ADMIN,
+    SPECIAL_KEYS.IS_SUSPENDED
+  ].reduce(
+    (profile, key) => Object.assign(profile, {[key]: DIG_OUT(user, key)}),
+    {
+      [PROFILE.USER]: AS_ARRAY(FORM_KEYS.PROFILE_FORM).reduce((_profile, key) =>
+          Object.assign(_profile, {[key]:
+              DIG_OUT(customProfile, key) ||
+              DIG_OUT(originalProfile, key)} ||
+            DIG_OUT(defaultValues, key)
+          ),
+        {[PROFILE.EMAIL]: DIG_OUT(user, PROFILE.EMAIL)}
+      ),
+      [PROFILE.LIKED_PLATES]: AS_ARRAY(user[PROFILE.LIKED_PLATES]).reduce(
+        (_plates, key) => Object.assign(_plates, {[key]: true}), {}
+      ),
+      [PROFILE.SUBSCRIPTIONS]: DIG_OUT(user, PROFILE.SUBSCRIPTIONS) || {}
+    }
+  );
 };
 
 Schema[COMMON.METHODS].getAsPlateAuthor = function () {

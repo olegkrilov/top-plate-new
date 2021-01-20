@@ -1,0 +1,68 @@
+@import '../../Theme/Mixins';
+
+.tp-dialogue-modal {
+
+  .tp-dialogue-modal-container {
+    height: 100vh;
+    padding: 20px 0;
+    position: relative;
+
+    .tp-dialogue-modal-substrate {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .tp-dialogue-modal-content {
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    @include use-box-shadow();
+  }
+
+  .tp-dialogue-modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .tp-dialogue-modal-error {
+    width: 100px;
+    height: 100px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .tp-dialogue-modal-message-frame {
+    display: inline-flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &.hasError {
+
+    .tp-dialogue-modal-error {
+      display: inline-flex;
+    }
+
+    .tp-dialogue-modal-message-frame {
+      display: inline-flex;
+      width: calc(100% - 100px);
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .tp-dialogue-modal-content {
+      @include use-box-shadow(1px 1px 5px 0 rgba(255, 0, 0, .5));
+    }
+  }
+}

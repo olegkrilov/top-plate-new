@@ -1,0 +1,49 @@
+@import '../../../Theme/Variables';
+@import '../../../Theme/Mixins';
+
+.tp-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none!important;
+  overflow: hidden;
+  padding: 0 20px;
+
+  .tp-button-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+    border-radius: 150px;
+    background: rgba(0, 0, 0, .6);
+    @include use-transformed(translate(-50%, -50%) scale(0));
+  }
+
+  &.green-btn {
+    background: $brand-green;
+    color: #fff;
+  }
+
+  &.wasCLicked {
+    .tp-button-decoration {
+      opacity: 0;
+      @include use-transformed(translate(-50%, -50%) scale(1));
+    }
+  }
+
+  &.withAnimation {
+    .tp-button-decoration {
+      @include use-transition(300ms);
+    }
+  }
+
+  &.isDisabled {
+    opacity: .7;
+  }
+}

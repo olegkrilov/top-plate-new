@@ -106,6 +106,9 @@ module.exports = {
             ADD_COMMENT: 'add_comment',
             ADD_REPORT: 'add_report',
             GET_COMMENTS: 'get_comments'
+        },
+        DEV: {
+            CREATE_RANDOM_PLATES: 'create_random_plates'
         }
     },
 
@@ -129,7 +132,8 @@ module.exports = {
         WARNINGS: 'warnings',
         CUSTOM_PROFILE: 'customProfile',
         SUBSCRIPTIONS: 'subscriptions',
-        REPORTED_PLATES: 'reportedPlates'
+        REPORTED_PLATES: 'reportedPlates',
+        ADMIN: 'admin'
     },
 
     PLATE: {
@@ -182,6 +186,7 @@ module.exports = {
         IS_READY: 'isReady',
         IS_LIKED: 'isLiked',
         CAN_LIKE: 'canLike',
+        CAN_VOTE: 'canVote',
         USED_IN: 'usedIn',
         CREATED_AT: 'createdAt'
     },

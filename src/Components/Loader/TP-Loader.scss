@@ -1,0 +1,75 @@
+@import '../../Theme/Variables';
+@import '../../Theme/Mixins';
+
+$root: '.tp-loader';
+
+@mixin blob-animation-steps {
+  from {
+    @include use-transformed(translate(0, -10px) scale(1, 1));
+  }
+  40% {
+    @include use-transformed(translate(0, 10px) scale(1.2, .5));
+  }
+  to {
+    @include use-transformed(translate(0, -10px) scale(1, 1));
+  }
+}
+
+@mixin use-blob-animation ($speed: 1s, $delay: 0, $ease: linear) {
+
+  animation: blob-animation $speed infinite $delay ease-in;
+  -o-animation: blob-animation $speed infinite $delay ease-in;
+  -moz-animation: blob-animation $speed infinite $delay ease-in;
+  -webkit-animation: blob-animation $speed infinite $delay ease-in;
+
+  @-moz-keyframes blob-animation {
+    @include blob-animation-steps();
+  }
+  @-webkit-keyframes blob-animation {
+    @include blob-animation-steps();
+  }
+  @keyframes blob-animation {
+    @include blob-animation-steps();
+  }
+}
+
+#{$root} {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px;
+
+  #{$root}-item {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background: $brand-green;
+
+    @include use-box-shadow();
+    @include use-transformed(translate(0, -10px) scale(1, 1));
+
+    &:first-child {
+      @include use-blob-animation(900ms, 0ms);
+    }
+
+    &:nth-child(2n) {
+      @include use-blob-animation(900ms, 300ms);
+    }
+
+    &:last-child {
+      @include use-blob-animation(900ms, 600ms);
+    }
+  }
+
+  &.colorWhite {
+    #{$root}-item {
+      background: #fff;
+    }
+  }
+
+  &.sizeSmall {
+    @include use-transformed(scale(.5));
+  }
+}
+

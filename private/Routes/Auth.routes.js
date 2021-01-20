@@ -18,7 +18,7 @@ module.exports = (App) => {
   
   const
     UserModel = DatabaseModule.getModel(DB_MODELS.APP_USER);
-  
+
   /** Handlers */
   const
     LOGIN_LOCAL = (req, res) => res.send(req[PROFILE.USER]),

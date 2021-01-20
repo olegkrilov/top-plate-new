@@ -53,6 +53,17 @@ const
       binaryData => fs.writeFileSync(`./${fullPath}`, binaryData),
       () => fullPath
     );
+  },
+  _copyFile = (sourcePath, destPath, fileName) => {
+    const
+      fullPath = `${destPath}/${fileName}`;
+
+    return PIPE(
+      () => _createFolder(destPath),
+      () => new Promise((resolve, reject) => fs.copyFile(sourcePath, fullPath, err =>
+        err ? reject(err) : resolve(fullPath)
+      )),
+    );
   };
 
 class StorageModule extends AbstractModule {
@@ -73,6 +84,19 @@ class StorageModule extends AbstractModule {
     
     return _saveFile(
       DIG_OUT(file, COMMON.PATH),
+      `${targetFolder}`,
+      `${fileName}.${fileExt}`
+    );
+  };
+
+  copyFile = (filePath, prefix = '', savePath = '') => {
+    const
+      fileExt = filePath.split('.').pop(),
+      fileName = `${prefix}_${GET_RANDOM_ID()}`,
+      targetFolder = `${STORAGE.ROOT_DIR}${savePath ? '/' + savePath : ''}`;
+
+    return _copyFile(
+      filePath,
       `${targetFolder}`,
       `${fileName}.${fileExt}`
     );

@@ -18,7 +18,7 @@ const
 
 const
   DEFAULT_LIMIT = 12,
-  DEFAULT_ENV = ENVIRONMENTS.RESTAURANT;
+  DEFAULT_ENV = ENVIRONMENTS.HOMEMADE;
 
 module.exports = (App) => {
 
