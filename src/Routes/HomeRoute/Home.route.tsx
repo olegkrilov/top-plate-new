@@ -46,6 +46,9 @@ export default class HomeRoute extends AbstractComponent {
               <span>Clear Data</span>
             </TP_Button>
           </div>
+          <div className={`col-12`}>
+            <h1>Available items</h1>
+          </div>
           {isLoading.value ?
             <div className={`col-12`}><TP_Loader /></div> :
             plates.items.map((d) =>
