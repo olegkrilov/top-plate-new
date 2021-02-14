@@ -10,7 +10,9 @@ export enum ROUTES {
   HOME = 'home',
   SIGN_IN = 'sign-in',
   USERS = 'users',
-  PLATES = 'plates'
+  PLATES = 'plates',
+
+  COMPONENTS_WORKSHOP = 'components-workshop'
 }
 
 export enum ROUTING_PROPS {

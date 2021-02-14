@@ -25,7 +25,7 @@ const
   InitDevRoutes = require('./private/Routes/Dev.routes');
 
 const
-  {PORT, SESSION_KEY, SESSION_SECRET} = config,
+  {PORT, NODE_ENV, SESSION_KEY, SESSION_SECRET} = config,
   {APP, DB, SERVER, AUTH, SMTP, STORAGE} = CONSTANTS.MODULES,
   {PIPE} = HELPERS;
 
@@ -110,6 +110,9 @@ async function runServer () {
       InitDevRoutes
     ].forEach(intiRoutes => intiRoutes(global[APP])),
     () => global[DB].refreshDefaultEntities(),
+    () => NODE_ENV === 'production' && global[APP].get('**',
+      (req, res) => res.sendFile(path.resolve(__dirname, './build/index.html'))
+    ),
     () => global[APP].listen(PORT, () => console.log(`Top-Plate-2 te salutant on PORT:${PORT}`))
   );
 }

@@ -15,7 +15,7 @@ $root: '.tp-loader';
   }
 }
 
-@mixin use-blob-animation ($speed: 1s, $delay: 0, $ease: linear) {
+@mixin use-blob-animation ($speed: 1s, $delay: 0ms, $ease: linear) {
 
   animation: blob-animation $speed infinite $delay ease-in;
   -o-animation: blob-animation $speed infinite $delay ease-in;

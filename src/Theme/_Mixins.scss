@@ -59,3 +59,9 @@
   box-shadow: $box-shadow-settings;
 }
 
+@mixin use-linear-gradient($direction, $props) {
+  background: -webkit-linear-gradient($direction, $props);
+  background: -moz-linear-gradient($direction, $props);
+  background: -o-linear-gradient($direction, $props);
+  background: linear-gradient($direction, $props);
+}

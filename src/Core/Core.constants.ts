@@ -33,7 +33,8 @@ export enum COMMON {
   ORIGIN = 'origin',
   TARGET = 'target',
   CURRENT = 'current',
-  VIEW = 'view'
+  VIEW = 'view',
+  DIRECTION = 'direction'
 }
 
 export enum COLLECTION_CONFIG_PROPS {
