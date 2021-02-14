@@ -6,6 +6,9 @@ import TP_Loader from '../Components/Loader/TP-Loader.component';
 const
   RedirectRoute = lazy(() => import('./RedirectRoute/Redirect.route')),
   HomeRoute = lazy(() => import('./HomeRoute/Home.route'));
+
+const
+  ComponentsWorkshop = lazy(() => import('./ComponentsWorkshop/ComponentsWorkshop.route'));
   
 const
   RouteLoader = <TP_Loader className={'full-height-without-header'}/>;
@@ -27,6 +30,15 @@ export default [
     [ROUTING_PROPS.COMPONENT]:
       <Suspense fallback={RouteLoader}>
         <HomeRoute />
+      </Suspense>,
+    [ROUTING_PROPS.ROUTE]: null
+  },
+  {
+    [COMMON.NAME]: ROUTES.COMPONENTS_WORKSHOP,
+    [ROUTING_PROPS.PATH]: ROUTES.COMPONENTS_WORKSHOP,
+    [ROUTING_PROPS.COMPONENT]:
+      <Suspense fallback={RouteLoader}>
+        <ComponentsWorkshop />
       </Suspense>,
     [ROUTING_PROPS.ROUTE]: null
   },

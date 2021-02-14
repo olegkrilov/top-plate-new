@@ -44,7 +44,7 @@ export class StructureObservable {
     return shouldBeUpdated ? this._refreshHash() : this;
   };
   
-  public setValue = (value): this => this._refreshValue(value, true);
+  public setValue = (value, replace: boolean = true): this => this._refreshValue(value, replace);
   
   public setKey = (key, value): this => this._refreshValue({[key]: value});
   

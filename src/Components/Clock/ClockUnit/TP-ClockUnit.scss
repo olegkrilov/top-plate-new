@@ -1,0 +1,116 @@
+@import "../../../Theme/Mixins";
+
+$gradient-properties: #fff, #fcfcfc, #dfdfdf, #d0d0d0;
+
+@mixin switch-value-steps {
+  0% {
+    @include use-transformed(rotateX(0deg));
+    @include use-transformed-origin(0, 100%);
+    @include use-box-shadow(0 -1px 5px 0 rgba(0,0,0,.7));
+  }
+  50% {
+    @include use-transformed(rotateX(-90deg));
+    @include use-transformed-origin(0, 100%);
+    @include use-box-shadow(0 -2px 5px 0 rgba(0,0,0,.7));
+  }
+  51% {
+    @include use-transformed(rotateX(-90deg));
+    @include use-transformed-origin(0, 0);
+    @include use-box-shadow(0 2px 5px 0 rgba(0,0,0,.7));
+  }
+  100% {
+    @include use-transformed(rotateX(0deg));
+    @include use-transformed-origin(0, 0);
+    @include use-box-shadow(0 1px 5px 0 rgba(0,0,0,.7));
+  }
+}
+
+@mixin use-switch-value-animation ($speed: 300ms, $delay: 0ms, $ease: linear) {
+
+  @-moz-keyframes switch-value-animation {
+    @include switch-value-steps();
+  }
+  @-webkit-keyframes switch-value-animation {
+    @include switch-value-steps();
+  }
+  @keyframes switch-value-animation {
+    @include switch-value-steps();
+  }
+
+  animation: switch-value-animation $speed forwards $delay ease-in;
+  -o-animation: switch-value-animation $speed forwards $delay ease-in;
+  -moz-animation: switch-value-animation $speed forwards $delay ease-in;
+  -webkit-animation: switch-value-animation $speed forwards $delay ease-in;
+}
+
+@mixin use-clock-unit-view ($height: 100%) {
+  border-radius: 2px;
+  width: 100%;
+  height: $height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include use-linear-gradient(to bottom, $gradient-properties);
+}
+
+.tp-clock-unit {
+  width: 30px;
+  height: 40px;
+  font-size: 35px;
+  display: inline-flex;
+  position: relative;
+  color: #010101;
+
+  &-master-panel {
+    @include use-clock-unit-view();
+  }
+
+  &-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include use-clock-unit-view(200%);
+  }
+
+  &-static-panel,
+  &-dynamic-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    @include use-transformed(rotateX(-90deg));
+    @include use-transformed-origin(0, 0);
+
+    &.withAnimation {
+      @include use-switch-value-animation();
+      @include use-box-shadow(0 0 5px 0 rgba(0,0,0,.7));
+    }
+
+    &.stuckBottom {
+      top: 50%;
+      @include use-transformed(rotateX(90deg));
+      @include use-transformed-origin(0, 100%);
+
+      .tp-clock-unit-content {
+        @include use-transformed(translate(0, -50%));
+      }
+    }
+
+    &.isOpened {
+      @include use-transformed(rotateX(0deg));
+    }
+
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: .1px;
+    background: rgba(255, 255, 255, .7);
+  }
+}
