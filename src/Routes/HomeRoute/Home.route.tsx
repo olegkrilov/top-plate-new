@@ -13,6 +13,13 @@ import {AWAIT, DIG_OUT} from '../../Core/Core.helpers';
 import TP_Button from '../../Components/Forms/Button/TP_Button.component';
 import {SharedService} from '../../Services/Shared.service';
 import {CollectionObservable} from '../../Core/Observables/Collection.observable';
+import TP_Clock from '../../Components/Clock/TP-Clock.component';
+import TP_ClockModel from '../../Components/Clock/TP-Clock.model';
+import './HomeRoute.scss';
+// TODO: it's should be changed
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ReactComponent as AppIcon }  from '../../assets/app_icon.svg';
 
 const
   ROOT = `tp-home-route`;
@@ -31,10 +38,12 @@ export default class HomeRoute extends AbstractComponent {
     trackBy: COMMON.DB_ID
   });
 
+  private readonly clock: TP_ClockModel = new TP_ClockModel();
+
   render () {
     const
       {generateRandomDataBtn, clearDataBtn, isLoading, plates} = this;
-    
+
     return <div className={`${ROOT} tp-route`}>
       <div className={`container`}>
         <div className={`row`}>
@@ -58,6 +67,11 @@ export default class HomeRoute extends AbstractComponent {
             )
           }
         </div>
+      </div>
+      <div className={`clock-container`}>
+        <AppIcon />
+        <span className={`clock-container-title`}>TIME LEFT</span>
+        <TP_Clock model={this.clock} />
       </div>
     </div>;
   }
@@ -93,7 +107,7 @@ export default class HomeRoute extends AbstractComponent {
       generateRandomDataBtn[EVENTS.ON_CLICK].subscribe(
         () => generateItemsPipe.run()
       ),
-      
+
       isLoading.subscribe(
         state => generateRandomDataBtn.toggleDisabled(state)
       )
