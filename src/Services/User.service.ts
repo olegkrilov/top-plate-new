@@ -11,6 +11,15 @@ export interface IUserCredentials {
   [PROFILE.PASSWORD]: string
 }
 
+export interface ICreateUserCredentials {
+  [PROFILE.FIRST_NAME]: string,
+  [PROFILE.LAST_NAME]: string,
+  [PROFILE.USER]: string,
+  [PROFILE.EMAIL]: string,
+  [PROFILE.PASSWORD]: string
+}
+
+
 export interface IUserProfile {
   [COMMON.DB_ID]: string,
   [PROFILE.EMAIL]?: string,
@@ -48,6 +57,11 @@ export class UserService {
         : ACCESS_LEVELS.GUEST
     })),
     () => this
+  );
+
+  public register = (credentials: ICreateUserCredentials) => PIPE(
+    () => apiService.sendPost(AUTHORIZATION_API.CREATE_LOCAL_USER, credentials),
+    () => this.login({email:credentials.email, password:credentials.password})
   );
 
   public login = (credentials: IUserCredentials) => PIPE(

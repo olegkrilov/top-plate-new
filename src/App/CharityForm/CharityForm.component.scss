@@ -1,0 +1,23 @@
+@import "../../Theme/Mixins";
+.tp-charity-modal-form{
+    background-color: black;
+    height: 660px;
+    color: white;
+    font-size: large;
+    text-align: center;
+}
+.main-header{
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: 50px;
+}
+.secondary-header{
+    font-size: 25px;  
+}
+
+.tp-charity-modal-picture{
+    height: 230px;
+    max-width: 360px;
+    margin: auto;
+    @include use-box-shadow(0px 0px 35px 1px white )
+}

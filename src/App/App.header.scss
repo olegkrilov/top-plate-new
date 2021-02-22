@@ -1,0 +1,82 @@
+@import '../Theme/Mixins';
+@import '../Theme/Variables';
+
+.tp-header{
+    background: black;
+}
+.tp-btn-border{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 40px;
+    border-radius: 40px;
+    border: solid 2px white;
+    outline: none!important;
+    overflow: hidden;
+    padding: 0 20px;
+    width: 250px;
+    height: 50px;
+    background: transparent;
+    color: white;
+}
+.tp-btn-border-small{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 40px;
+    border-radius: 40px;
+    border: solid 2px white;
+    outline: none!important;
+    overflow: hidden;
+    padding: 0 20px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    color: white;
+}
+.tp-btn-big-green{
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    min-height: 40px;
+    border-radius: 30px;
+    border: none;
+    outline: none!important;
+    overflow: hidden;
+    width: 300px;
+    height: 60px;
+    background:  #0da804;
+    color: white;
+    font-size: larger;   
+}
+.tp-search-bar{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    outline: none!important;
+    border-radius: 40px;
+    border: none;
+    min-height: 40px;
+    background-color: #2c2c2c;   
+}
+.tp-green-btn-icon{
+    font-size: 50px;
+}
+.tp-btn-icon-small{
+    font-size: 25px;
+    
+}
+.tp-green-btn-text{
+    font-size: 20px;
+    padding-left: 40px;
+    font-weight: 500;
+}
+.tp-btn-text{
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+

@@ -3,7 +3,6 @@
 
 .tp-button {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
   position: relative;
   min-height: 40px;
@@ -11,7 +10,7 @@
   border: none;
   outline: none!important;
   overflow: hidden;
-  padding: 0 20px;
+  
 
   .tp-button-decoration {
     position: absolute;
@@ -28,6 +27,19 @@
   &.green-btn {
     background: $brand-green;
     color: #fff;
+    justify-content: center;
+  }
+
+  &.black-btn {
+    background-color: black;
+    color: white;
+    justify-content: center;
+  }
+
+  &.transparent-btn {
+    background: transparent;
+    color: white;
+    justify-content: center;
   }
 
   &.wasCLicked {

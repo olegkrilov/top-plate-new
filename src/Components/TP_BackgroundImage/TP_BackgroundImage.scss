@@ -1,0 +1,9 @@
+.tp-background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  
+    &.size-contain {
+      background-size: contain;
+    }
+  }

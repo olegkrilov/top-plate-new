@@ -20,6 +20,13 @@ export const
 
   IS_PROMISE = (val: any) => val && IS_FUNCTION(val[ASYNC.THEN]),
 
+  CHECK_AND_CALL = (..._args) => {
+    let
+      args = Array.from(_args),
+      fn = args.splice(0, 1)[0];
+    return IS_FUNCTION(fn) && fn.apply(null, args);
+  },
+
   AS_FUNCTION = (..._args) => {
     const
       args = Array.from(_args),

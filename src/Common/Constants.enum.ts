@@ -36,6 +36,7 @@ export enum PROFILE {
   EMAIL = 'email',
   PASSWORD = 'password',
   OLD_PASSWORD = 'oldPassword',
+  CONFIRM_PASSWORD = 'confirmPassword',
   HASHED_PASSWORD = 'hashedPassword',
   LAST_LOGGED = 'lastLogged',
   PROVIDER = 'provider',

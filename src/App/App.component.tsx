@@ -7,9 +7,14 @@ import {STATES} from '../Core/Core.constants';
 import './App.scss';
 import {SharedService} from '../Services/Shared.service';
 import SignInForm from './SignInForm/SignInForm.component';
+import RegisterForm from './RegisterForm/RegisterForm.component';
+import PageUnderConstractForm from './PageUnderConstractForm/PageUnderConstractForm';
+import CharityForm from './CharityForm/CharityForm.component'
 import {UserService} from '../Services/User.service';
 import TP_Dialogue from '../Components/Dialogue/TP-Dialogue.component';
 import ErrorDialogueTpl from '../Components/Dialogue/Templates/ErrorDialogue.tpl';
+import {AppHeader} from './App.header';
+import {AppFooter} from './App.footer';
 
 @inject(SERVICES.ROUTING_SERVICE, SERVICES.USER_SERVICE, SERVICES.SHARED_SERVICE)
 @observer
@@ -35,20 +40,25 @@ class App extends AbstractComponent {
         .show();
 
     return <div>
+      <AppHeader/>
       <MobxRouter store={this.props[SERVICES.ROUTING_SERVICE]} />
       <SignInForm/>
+      <RegisterForm/>
+      <CharityForm/>
+      <PageUnderConstractForm/>
       <TP_Dialogue model={sharedService.appDialogue} />
       <div className={`test-btn`}>
-        {!userService.isAuthorized && <button onClick={() => sharedService.loginFormModal.toggleValue()}>
+        {/* {!userService.isAuthorized && <button onClick={() => sharedService.loginFormModal.toggleValue()}>
           SIGN IN
         </button>}
         {userService.isAuthorized && <button onClick={() => userService.logout()}>
           SIGN OUT
-        </button>}
-        {!sharedService.appDialogue[STATES.IS_OPENED].value && <button onClick={() => testGrowl()}>
+        </button>}  */}
+        {/* {!sharedService.appDialogue[STATES.IS_OPENED].value && <button onClick={() => testGrowl()}>
           SHOW GROWL
-        </button>}
+        </button>} */}
       </div>
+      <AppFooter/>
     </div>;
   }
 }

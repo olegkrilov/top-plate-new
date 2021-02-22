@@ -1,5 +1,44 @@
+.display-flex,
+.display-inline-flex {
+  align-items: center;
+
+  &.align-left {
+    justify-content: flex-start;
+  }
+  &.align-center {
+    justify-content: center;
+  }
+  &.align-right {
+    justify-content: flex-end;
+  }
+}
+
 .full-width {
   width: 100%;
+}
+
+.three-quarters-width {
+  width: 75%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.pos-rel {
+  position: relative;
+}
+.pos-abs {
+  position: absolute;
+}
+
+.size-cover {
+  width: 100%;
+  height: 100%;
 }
 
 /* Breakpoint XS */
@@ -75,4 +114,87 @@
 .full-height-without-header {
   min-height: calc(100vh - 100px);
   width: 100%;
+}
+
+.header-height {
+  height: 100px;
+}
+.sign-in-form-height {
+  height: 400px;
+}
+.register-form-height {
+  height: 800px;
+}
+.logo-width {
+  width: 177px;
+}
+
+$margin-list: margin margin-top margin-bottom margin-left margin-right;
+$padding-list: padding padding-top padding-bottom padding-left padding-right;
+
+@for $i from 0 through 20 {
+
+  @each $margin-property in $margin-list {
+    $_i: $i * 10;
+
+    .#{$margin-property}-#{$_i} {
+      #{$margin-property}: #{$_i}px;
+    }
+
+    .#{$margin-property}-neg-#{$_i} {
+      #{$margin-property}: -#{$_i}px;
+    }
+
+    .margin-v-#{$_i} {
+      margin-top: #{$_i}px;
+      margin-bottom: #{$_i}px;
+    }
+
+    .margin-h-#{$_i} {
+      margin-left: #{$_i}px;
+      margin-right: #{$i}px;
+    }
+
+    .margin-#{$_i} {
+      margin: #{$_i}px;
+    }
+  }
+
+  @each $padding-property in $padding-list {
+    $_i: $i * 10;
+
+    .#{$padding-property}-#{$_i} {
+      #{$padding-property}: #{$_i}px;
+    }
+
+    .padding-v-#{$_i} {
+      padding-top: #{$_i}px;
+      padding-bottom: #{$_i}px;
+    }
+
+    .padding-h-#{$_i} {
+      padding-left: #{$_i}px;
+      padding-right: #{$_i}px;
+    }
+
+    .padding-#{$_i} {
+      padding: #{$_i}px;
+    }
+  }
+}
+
+$positions-list: top right bottom left;
+
+@for $i from 0 through 10 {
+  $_i: $i * 50;
+
+  @each $position-property in $positions-list {
+    .#{$position-property}-#{$_i} {
+      #{$position-property}: #{$_i}px;
+    }
+
+    .#{$position-property}-neg-#{$_i} {
+      #{$position-property}: -#{$_i}px;
+    }
+  }
 }
