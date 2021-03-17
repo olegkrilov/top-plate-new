@@ -13,13 +13,27 @@ import {AWAIT, DIG_OUT} from '../../Core/Core.helpers';
 import TP_Button from '../../Components/Forms/Button/TP_Button.component';
 import {SharedService} from '../../Services/Shared.service';
 import {CollectionObservable} from '../../Core/Observables/Collection.observable';
+import {TP_BackgroundImage} from '../../Components/TP_BackgroundImage/TP_BackgroundImage';
+import {FiMapPin} from "react-icons/fi";
+import {BsReply} from "react-icons/bs";
+import {BsCardText} from "react-icons/bs";
+import {RoutingService} from "../../Services/Routing.service";
+import {ROUTES} from "../../Common/Constants.enum";
+import GridLayout from "../../Components/PlatesLayout/GridLayout";
+import ColumnLayout from "../../Components/PlatesLayout/ColumnLayout";
+
+import './Home.route.scss';
+
 
 const
   ROOT = `tp-home-route`;
 
+
+
 @inject(SERVICES.API_SERVICE, SERVICES.ROUTING_SERVICE, SERVICES.SHARED_SERVICE)
 @observer
-export default class HomeRoute extends AbstractComponent {
+export default class HomeRoute extends AbstractComponent { 
+
 
   private readonly isLoading: BooleanObservable = new BooleanObservable();
 
@@ -31,34 +45,34 @@ export default class HomeRoute extends AbstractComponent {
     trackBy: COMMON.DB_ID
   });
 
+  private onTumblerClick = () => this.services.sharedService.semiColomn.toggleValue();
+
+  private changePage = () => this.services.routingService.goTo(ROUTES.MAIN);
+
+
+
   render () {
     const
-      {generateRandomDataBtn, clearDataBtn, isLoading, plates} = this;
+      {generateRandomDataBtn, clearDataBtn, isLoading, plates} = this,
+      sharedService: SharedService = this.services[SERVICES.SHARED_SERVICE];
+      
     
     return <div className={`${ROOT} tp-route`}>
-      <div className={`container`}>
-        <div className={`row`}>
-          <div className={`col-12 text-right mt-5 mb-5`}>
-            <TP_Button className={`green-btn mr-2`} model={generateRandomDataBtn}>
-              <span>Generate Data</span>
-            </TP_Button>
-            <TP_Button className={`d-inline-block`} model={clearDataBtn}>
-              <span>Clear Data</span>
-            </TP_Button>
-          </div>
-          <div className={`col-12`}>
-            <h1>Available items</h1>
-          </div>
-          {isLoading.value ?
-            <div className={`col-12`}><TP_Loader /></div> :
-            plates.items.map((d) =>
-              <div className={`col-12 p-2`} key={d[COMMON.DB_ID]}>
-                <span>{d[COMMON.NAME]}</span>
-              </div>
-            )
-          }
-        </div>
-      </div>
+
+        <TP_Button onClick={() => this.onTumblerClick()}>     
+              <span>TUMBLER</span>
+        </TP_Button>
+        <TP_Button onClick={() => this.changePage()}>     
+              <span>PAGECHANGE</span>
+        </TP_Button>
+        {sharedService.semiColomn.value && <div>
+          <GridLayout/>
+        </div>}
+        {!sharedService.semiColomn.value && <div>
+          <ColumnLayout/>
+        </div>}
+        
+     
     </div>;
   }
 

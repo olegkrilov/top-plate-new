@@ -6,6 +6,7 @@ import {StringObservable} from "../../Core/Observables/String.observable";
 import {BACKGROUND_IMAGE} from "../../Core/Constants/PropertiesAndAttributes.cnst";
 import {inject, observer} from "mobx-react";
 import {SharedService} from "../../Services/Shared.service";
+import "./TP_BackgroundImage.scss";
 
 const
   ROOT = `tp-background-image`,

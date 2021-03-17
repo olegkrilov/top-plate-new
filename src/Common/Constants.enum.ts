@@ -10,7 +10,8 @@ export enum ROUTES {
   HOME = 'home',
   SIGN_IN = 'sign-in',
   USERS = 'users',
-  PLATES = 'plates'
+  PLATES = 'plates',
+  MAIN = 'main'
 }
 
 export enum ROUTING_PROPS {
@@ -51,6 +52,12 @@ export enum PROFILE {
   REPORTED_PLATES = 'reportedPlates',
   ADMIN = 'admin',
   IMAGE = 'image'
+}
+
+export enum PLATE {
+  INGREDIENT = 'ingredient',
+  DESCRIPTION = 'description',
+  FILE_INPUT = 'fileInput'
 }
 
 export enum ENVIRONMENTS {

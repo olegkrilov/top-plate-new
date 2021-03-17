@@ -44,6 +44,12 @@ export class AbstractObservable {
     this._value = value;
     return this;
   }
+
+  @action
+  public saveValue () {
+    this._savedValue = this._value;
+    return this;
+  }
   
   @computed
   public get value (): any {

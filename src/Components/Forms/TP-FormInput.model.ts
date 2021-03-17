@@ -8,7 +8,7 @@ export default class TP_FormInputModel {
   
   public readonly [COMMON.NAME]: string;
   
-  public readonly [STATES.IS_REQUIRED]: BooleanObservable = new BooleanObservable();
+  public readonly [STATES.IS_REQUIRED]: BooleanObservable = new BooleanObservable(); 
   
   public readonly [STATES.IS_FOCUSED]: BooleanObservable = new BooleanObservable();
   

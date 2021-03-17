@@ -25,7 +25,7 @@ export default class PageUnderConstractForm extends AbstractComponent{
         sharedService: SharedService = services[SERVICES.SHARED_SERVICE];
 
         return <TP_Modal model={sharedService.pageUnderConstractModal}>
-                    <div className={`container`}>
+                    <div className={`container padding-top-200`}>
                         <div className={`row register-form-height`}>
                             <div className={`col-12 col-lg-3 col-xl-3`}></div>
                             <div  className={`col-12 col-lg-6 col-xl-6`}>

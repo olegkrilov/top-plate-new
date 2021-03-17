@@ -1,0 +1,107 @@
+@import "../../../Theme/Mixins";
+@import "../../../Theme/Variables";
+
+@mixin use-pulse () {
+  animation: pulse 1000ms infinite ease-out;
+  -o-animation: pulse 1000ms infinite ease-out;
+  -moz-animation: pulse 1000ms infinite ease-out;
+  -webkit-animation: pulse 1000ms infinite ease-out;
+
+  @-moz-keyframes pulse {
+    from {
+      opacity: 0;
+      @include use-transformed(scale(.5));
+    }
+    50% {
+      opacity: .1;
+      @include use-transformed(scale(1));
+    }
+    to {
+      opacity: .0;
+      @include use-transformed(scale(1.2));
+    }
+  }
+  @-webkit-keyframes pulse {
+    from {
+      opacity: 0;
+      @include use-transformed(scale(.5));
+    }
+    50% {
+      opacity: .1;
+      @include use-transformed(scale(1));
+    }
+    to {
+      opacity: .0;
+      @include use-transformed(scale(1.2));
+    }
+  }
+  @keyframes pulse {
+    from {
+      opacity: 0;
+      @include use-transformed(scale(.5));
+    }
+    50% {
+      opacity: .1;
+      @include use-transformed(scale(1));
+    }
+    to {
+      opacity: .0;
+      @include use-transformed(scale(1.2));
+    }
+  }
+}
+
+.tp-file-input {
+  border: 2px dashed grey;
+  background: black;
+  min-height: 200px;
+  overflow: hidden;
+
+  .ew-file-input-trigger {
+    min-height: calc(200px - 4px);
+  }
+
+  .ew-file-input-file {
+    max-width: 100%;
+
+    .ew-file-input-file-preview {
+      border: 1px solid darkgray;
+      max-width: 100%;
+
+      .ew-file-input-file-preview-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .ew-file-input-file-preview-remove-btn {
+        @include use-transformed(translate(50%, -50%));
+        @include use-transition();
+        opacity: 0;
+      }
+
+      &:hover {
+        .ew-file-input-file-preview-remove-btn {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &:before {
+    content: '';
+    display: none;
+    top: 0;
+    left:0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    @include use-pulse();
+  }
+
+  &.isActive {
+    &:before {
+      display: block;
+    }
+  }
+}

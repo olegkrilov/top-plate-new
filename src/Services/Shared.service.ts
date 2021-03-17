@@ -7,7 +7,11 @@ export class SharedService {
 
   public readonly pageUnderConstractModal: BooleanObservable = new BooleanObservable();
 
+  public readonly addVideoFormModal: BooleanObservable = new BooleanObservable();
+
   public readonly loginFormModal: BooleanObservable = new BooleanObservable();
+
+  public readonly semiColomn: BooleanObservable = new BooleanObservable();
 
   public readonly registerFormModal: BooleanObservable = new BooleanObservable();
 

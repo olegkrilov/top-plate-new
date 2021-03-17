@@ -51,8 +51,8 @@ export class AppHeader extends AbstractComponent {
     sharedService: SharedService = this.services[SERVICES.SHARED_SERVICE],
     userService: UserService = this.services[SERVICES.USER_SERVICE];
 
-    return <div className={`${ROOT} pos-rel header-height`}> 
-      <div className={``}>
+    return <div className={`${ROOT}`}> 
+      <div className={`container-fluid`}>
         <div className={`full-width row header-height`}>
           <div className={`col-12 col-lg-3 col-xl-3 header-height`}>       
               <div className={`${LOGO} logo-width size-cover`}>
@@ -61,10 +61,14 @@ export class AppHeader extends AbstractComponent {
           </div>
           <div className={`col-12 col-lg-3 col-xl-3 header-height`}>
           <div className={`padding-top-20 `}>
-            <TP_Button className={BTN_BIG_GREEN} onClick={() => sharedService.loginFormModal.toggleValue()}>
+          {userService.isAuthorized && <TP_Button className={BTN_BIG_GREEN} onClick={() => sharedService.loginFormModal.toggleValue()}>
               <AiOutlinePlusCircle className={GREEN_BTN_ICON}/>
-              <span className={GREEN_BTN_TEXT}>ADD VIDEO</span>
-            </TP_Button>
+              <span className={GREEN_BTN_TEXT}>ADD PLATE</span>
+            </TP_Button>}
+            {!userService.isAuthorized &&<TP_Button className={BTN_BIG_GREEN} onClick={() => sharedService.addVideoFormModal.toggleValue()}>
+              <AiOutlinePlusCircle className={GREEN_BTN_ICON}/>
+              <span className={GREEN_BTN_TEXT}>ADD PLATE</span>
+            </TP_Button>}
           </div>  
           </div>       
           <div className={`col-12 col-lg-3 col-xl-3 header-height pos-rel hidden-lg-down`}>

@@ -6,6 +6,7 @@ import TP_FormInputModel from './TP-FormInput.model';
 import TP_StringInputModel from './StringInput/TP-StringInput.model';
 import {AS_ARRAY, IS_STRING} from '../../Core/Core.helpers';
 import {EventObservable} from '../../Core/Observables/Event.observable';
+import { TP_FileInputModel } from './FileInput/TP-FileInput.model';
 
 export default class TP_FormModel {
   
@@ -21,9 +22,12 @@ export default class TP_FormModel {
     this.fields.addItems(AS_ARRAY(d).reduce((fields, dd) => {
       if (IS_STRING(dd)) fields.push(new TP_StringInputModel(dd));
       else if (dd instanceof TP_StringInputModel || dd instanceof TP_FormInputModel) fields.push(dd);
+      else if (dd instanceof TP_FileInputModel) {fields.push(dd)
+      console.log(dd);}
       return fields;
+      
     }, []));
-    
+    console.log(this.fields.items)
     return this;
   };
   

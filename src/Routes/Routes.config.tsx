@@ -5,7 +5,8 @@ import TP_Loader from '../Components/Loader/TP-Loader.component';
 
 const
   RedirectRoute = lazy(() => import('./RedirectRoute/Redirect.route')),
-  HomeRoute = lazy(() => import('./HomeRoute/Home.route'));
+  HomeRoute = lazy(() => import('./HomeRoute/Home.route')),
+  MainRoute = lazy(() => import('./MainRoute/Main.route'));
   
 const
   RouteLoader = <TP_Loader className={'full-height-without-header'}/>;
@@ -40,6 +41,15 @@ export default [
     [COMMON.NAME]: ROUTES.PLATES,
     [ROUTING_PROPS.PATH]: `${ROUTES.PLATES}/:plateId?`,
     [ROUTING_PROPS.COMPONENT]: <div>Plates</div>,
+    [ROUTING_PROPS.ROUTE]: null
+  },
+  {
+    [COMMON.NAME]: ROUTES.MAIN,
+    [ROUTING_PROPS.PATH]: ROUTES.MAIN,
+    [ROUTING_PROPS.COMPONENT]:
+      <Suspense fallback={RouteLoader}>
+        <MainRoute />
+      </Suspense>,
     [ROUTING_PROPS.ROUTE]: null
   }
 ];

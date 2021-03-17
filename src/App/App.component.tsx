@@ -9,6 +9,7 @@ import {SharedService} from '../Services/Shared.service';
 import SignInForm from './SignInForm/SignInForm.component';
 import RegisterForm from './RegisterForm/RegisterForm.component';
 import PageUnderConstractForm from './PageUnderConstractForm/PageUnderConstractForm';
+import AddVideoForm from './AddVideoForm/AddVideoForm'
 import CharityForm from './CharityForm/CharityForm.component'
 import {UserService} from '../Services/User.service';
 import TP_Dialogue from '../Components/Dialogue/TP-Dialogue.component';
@@ -41,10 +42,14 @@ class App extends AbstractComponent {
 
     return <div>
       <AppHeader/>
-      <MobxRouter store={this.props[SERVICES.ROUTING_SERVICE]} />
+      <div className={`padding-top-100 padding-bottom-70`}>
+        <MobxRouter store={this.props[SERVICES.ROUTING_SERVICE]} />
+      </div>
+      
       <SignInForm/>
       <RegisterForm/>
       <CharityForm/>
+      <AddVideoForm/>
       <PageUnderConstractForm/>
       <TP_Dialogue model={sharedService.appDialogue} />
       <div className={`test-btn`}>
